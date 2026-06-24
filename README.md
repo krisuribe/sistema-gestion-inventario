@@ -1,4 +1,4 @@
-
+```markdown
 # 📦 Sistema de Gestión de Inventario - ELECTRIFER
 
 Sistema web profesional para gestionar categorías, proveedores, productos y cotizaciones con generación de PDF nativo automatizado. Desarrollado en PHP + MySQL + JavaScript puro (sin frameworks de frontend) y Dompdf en el backend.
@@ -7,7 +7,7 @@ Sistema web profesional para gestionar categorías, proveedores, productos y cot
 
 ## 🗂️ Estructura de Archivos
 
-
+```text
 proyecto/
 ├── index.html              # Interfaz principal (todas las vistas en tabs)
 ├── app.js                  # Lógica del frontend (servicios + UI asíncrona)
@@ -19,7 +19,7 @@ proyecto/
 ├── api_cotizaciones.php    # API REST: Cotizaciones, historial y motor PDF
 └── vendor/                 # Dependencias de Composer (Dompdf)
 
-
+```
 
 ---
 
