@@ -7,6 +7,7 @@ Sistema web profesional para gestionar categorías, proveedores, productos y cot
 
 ## 🗂️ Estructura de Archivos
 
+
 proyecto/
 ├── index.html              # Interfaz principal (todas las vistas en tabs)
 ├── app.js                  # Lógica del frontend (servicios + UI asíncrona)
@@ -17,6 +18,8 @@ proyecto/
 ├── api_productos.php       # API REST: Productos e inventario
 ├── api_cotizaciones.php    # API REST: Cotizaciones, historial y motor PDF
 └── vendor/                 # Dependencias de Composer (Dompdf)
+
+
 
 ---
 
@@ -37,15 +40,19 @@ proyecto/
 
 Copia toda la carpeta del proyecto dentro del directorio raíz de tu servidor local (por ejemplo, en XAMPP):
 
+```bash
 C:\xampp\htdocs\inventario\
 
+```
 
 ### 2. Instalar dependencias del Backend (Dompdf)
 
 Abre una terminal en la raíz del proyecto (donde está el archivo `composer.json`) y ejecuta el siguiente comando para reconstruir las librerías de generación de PDF:
 
+```bash
 composer install
 
+```
 
 > 💡 **Nota Corporativa:** Asegúrate de guardar el archivo de tu logotipo en la raíz del proyecto con el nombre exacto de **`logo.png`** para que el sistema lo procese en los reportes.
 
@@ -53,6 +60,7 @@ composer install
 
 Abre phpMyAdmin (`http://localhost/phpmyadmin`), crea una base de datos llamada `inventario_db` y ejecuta el siguiente script SQL:
 
+```sql
 CREATE DATABASE IF NOT EXISTS inventario_db CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;
 USE inventario_db;
 
@@ -119,14 +127,19 @@ CREATE TABLE cotizacion_detalles (
   FOREIGN KEY (producto_id)   REFERENCES productos(id)
 );
 
+```
+
 ### 4. Configurar la conexión (`db.php`)
 
 Abre `db.php` y ajusta las credenciales según tu entorno si es necesario:
 
+```php
 $host     = '127.0.0.1';
 $db_name  = 'inventario_db';
 $username = 'root';   
 $password = '';       // Vacío por defecto en XAMPP
+
+```
 
 ---
 
@@ -178,3 +191,8 @@ El sistema procesa los documentos comerciales mediante un flujo avanzado de Java
 
 Desarrollado para la gestión y automatización de **ELECTRIFER**.
 
+```
+
+Con este archivo tu documentación queda impecable y mapea con total precisión técnica cómo opera el software por detrás. ¡Mucho éxito con tu proyecto!
+
+```
