@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Inventario</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Gestión de Inventario</h1>
+            <!-- ✅ FIX: <nav> ahora tiene su </nav> de cierre -->
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="categorias">Categorías</button>
+                <button class="tab-btn" data-tab="proveedores">Proveedores</button>
+                <button class="tab-btn" data-tab="productos">Productos</button>
+                <button class="tab-btn" data-tab="cotizaciones">Cotizaciones</button>
+                <button class="tab-btn" data-tab="historial">Historial de Cotizaciones</button>
+            </nav>
+        </header>
+
+        <!-- CATEGORÍAS -->
+        <section id="categorias" class="tab-content active">
+            <h2>Gestión de Categorías</h2>
+            <div class="form-container">
+                <h3 id="categoria-form-title">Registrar Nueva Categoría</h3>
+                <form id="categoria-form">
+                    <input type="hidden" id="categoria-id">
+                    <div class="form-group">
+                        <label for="categoria-nombre">Nombre de la Categoría *</label>
+                        <input type="text" id="categoria-nombre" required>
+                        <span class="error-message" id="categoria-nombre-error"></span>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="categoria-submit-btn">Guardar</button>
+                        <button type="button" id="categoria-cancel-btn" style="display:none">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="list-container">
+                <h3>Listado de Categorías</h3>
+                <div class="table-container">
+                    <table id="categorias-table">
+                        <thead><tr><th>Nombre de la Categoría</th><th>Acciones</th></tr></thead>
+                        <tbody id="categorias-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROVEEDORES -->
+        <section id="proveedores" class="tab-content">
+            <h2>Gestión de Proveedores</h2>
+            <div class="form-container">
+                <h3 id="proveedor-form-title">Registrar Nuevo Proveedor</h3>
+                <form id="proveedor-form">
+                    <input type="hidden" id="proveedor-id">
+                    <div class="form-group">
+                        <label for="proveedor-nombre">Nombre (Razón Social) *</label>
+                        <input type="text" id="proveedor-nombre" required>
+                        <span class="error-message" id="proveedor-nombre-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="proveedor-telefono">Teléfono *</label>
+                        <input type="tel" id="proveedor-telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="proveedor-correo">Correo Electrónico *</label>
+                        <input type="email" id="proveedor-correo" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="proveedor-submit-btn">Guardar</button>
+                        <button type="button" id="proveedor-cancel-btn" style="display:none">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="list-container">
+                <h3>Listado de Proveedores</h3>
+                <div class="table-container">
+                    <table id="proveedores-table">
+                        <thead><tr><th>Nombre</th><th>Teléfono</th><th>Correo Electrónico</th><th>Acciones</th></tr></thead>
+                        <tbody id="proveedores-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTOS -->
+        <section id="productos" class="tab-content">
+            <h2>Gestión de Productos</h2>
+            <div class="search-filters">
+                <div class="search-group">
+                    <label for="producto-busqueda">Buscar por Código o Nombre:</label>
+                    <input type="text" id="producto-busqueda" placeholder="Ingrese código o nombre del producto">
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-categoria">Filtrar por Categoría:</label>
+                    <select id="filtro-categoria"><option value="">Todas las Categorías</option></select>
+                </div>
+                <div class="filter-group">
+                    <label for="filtro-proveedor">Filtrar por Proveedor:</label>
+                    <select id="filtro-proveedor"><option value="">Todos los proveedores</option></select>
+                </div>
+            </div>
+            <div class="form-container">
+                <h3 id="producto-form-title">Registrar Nuevo Producto</h3>
+                <form id="producto-form">
+                    <input type="hidden" id="producto-id">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="producto-nombre">Nombre *</label>
+                            <input type="text" id="producto-nombre" required>
+                            <span class="error-message" id="producto-error-span"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="producto-descripcion">Descripción</label>
+                            <textarea id="producto-descripcion" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="producto-categoria">Categoría *</label>
+                            <select id="producto-categoria" required><option value="">Seleccione una categoría</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="producto-proveedor">Proveedor</label>
+                            <select id="producto-proveedor"><option value="">Sin proveedor</option></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="producto-existencia">Existencia *</label>
+                            <input type="number" id="producto-existencia" min="0" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="producto-precio-costo">Precio de Costo *</label>
+                            <input type="number" id="producto-precio-costo" min="0" step="0.01" value="0" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="producto-submit-btn">Guardar</button>
+                        <button type="button" id="producto-cancel-btn" style="display:none">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="list-container">
+                <h3>Listado de Productos</h3>
+                <div class="table-container">
+                    <table id="productos-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th><th>Nombre</th><th>Categoría</th>
+                                <th>Proveedor</th><th>Existencia</th><th>Precio Costo</th><th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productos-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- COTIZACIONES -->
+        <section id="cotizaciones" class="tab-content">
+            <h2>Gestión de Cotizaciones</h2>
+            <div class="form-container">
+                <h3 id="cotizacion-form-title">Registrar Nueva Cotización</h3>
+                <form id="cotizacion-form">
+
+                    <h4>1. Datos del Cliente</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cot-cliente-nombre">Nombre o Razón Social *</label>
+                            <input type="text" id="cot-cliente-nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cot-cliente-rut">RUT (Opcional)</label>
+                            <input type="text" id="cot-cliente-rut">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cot-cliente-telefono">Teléfono (Opcional)</label>
+                            <input type="tel" id="cot-cliente-telefono">
+                        </div>
+                        <div class="form-group">
+                            <label for="cot-cliente-correo">Correo (Opcional)</label>
+                            <input type="email" id="cot-cliente-correo">
+                        </div>
+                    </div>
+
+                    <hr style="margin:20px 0">
+                    <h4>2. Añadir Productos</h4>
+                    <div class="form-group autocomplete-container">
+                        <label for="cot-producto-buscar">Buscar Producto (por Código o Nombre)</label>
+                        <input type="text" id="cot-producto-buscar" autocomplete="off" placeholder="Ej: Tornillo o TOR001">
+                        <div id="cot-producto-resultados" class="autocomplete-results"></div>
+                    </div>
+                    <div class="table-container">
+                        <table id="cot-tabla-productos">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th class="col-cantidad">Cantidad</th>
+                                    <th class="col-precio">Precio Unit.</th>
+                                    <th class="col-subtotal">Subtotal</th>
+                                    <th class="col-acciones"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cot-tbody-productos">
+                                <tr><td colspan="5" style="text-align:center">Añada productos desde el buscador...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="totals-container" style="text-align:right; margin-top:15px;">
+                        <h3 style="margin-bottom:5px;">Subtotal: <span id="cot-subtotal">$0.00</span></h3>
+                        <h3 style="margin-bottom:5px;">IVA (19%): <span id="cot-iva">$0.00</span></h3>
+                        <h2 style="color:#1e3a5f;">Total: <span id="cot-total">$0.00</span></h2>
+                    </div>
+
+                    <hr style="margin:20px 0">
+                    <h4>3. Condiciones (Opcionales)</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cot-forma-pago">Forma de Pago</label>
+                            <input type="text" id="cot-forma-pago" placeholder="Ej: 50% anticipo, 50% entrega">
+                        </div>
+                        <div class="form-group">
+                            <label for="cot-validez">Validez de la Oferta</label>
+                            <input type="text" id="cot-validez" placeholder="Ej: 10 días">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cot-entrega">Fecha/Plazo de Entrega</label>
+                            <input type="text" id="cot-entrega" placeholder="Ej: Inmediata o 5 días hábiles">
+                        </div>
+                        <div class="form-group">
+                            <label for="cot-garantia">Garantía</label>
+                            <input type="text" id="cot-garantia" placeholder="Ej: 3 meses por falla de fábrica">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Guardar Cotización</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- HISTORIAL -->
+        <!-- ✅ FIX: sin filas hardcodeadas, el JS las pone -->
+        <section id="historial" class="tab-content">
+            <h2>Historial de Cotizaciones</h2>
+            <div class="search-filters">
+                <div class="filter-group">
+                    <label for="hist-filtro-cliente">Filtrar por Cliente:</label>
+                    <input type="text" id="hist-filtro-cliente" placeholder="Nombre o RUT del cliente...">
+                </div>
+                <div class="filter-group">
+                    <label for="hist-filtro-fecha">Filtrar por Fecha:</label>
+                    <input type="date" id="hist-filtro-fecha">
+                </div>
+            </div>
+            <div class="list-container">
+                <h3>Listado de Cotizaciones Guardadas</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Folio</th>
+                                <th>Cliente</th>
+                                <th>Fecha de Emisión</th>
+                                <th>Monto Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <!-- ✅ tbody vacío: el JS lo rellena -->
+                        <tbody id="historial-tabla-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de Confirmación -->
+        <div id="confirm-modal" class="modal">
+            <div class="modal-content">
+                <h3>Confirmar acción</h3>
+                <p id="confirm-message"></p>
+                <div class="modal-actions">
+                    <button id="confirm-btn" class="btn-danger">Confirmar</button>
+                    <button id="cancel-confirm-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- fin .container -->
+
+    <script src="app.js"></script>
+</body>
+</html>
