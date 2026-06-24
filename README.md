@@ -191,8 +191,3 @@ El sistema procesa los documentos comerciales mediante un flujo avanzado de Java
 
 Desarrollado para la gestión y automatización de **ELECTRIFER**.
 
-```
-
-Con este archivo tu documentación queda impecable y mapea con total precisión técnica cómo opera el software por detrás. ¡Mucho éxito con tu proyecto!
-
-```
